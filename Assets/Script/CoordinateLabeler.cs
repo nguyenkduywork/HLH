@@ -8,7 +8,7 @@ using TMPro;
 public class CoordinateLabeler : MonoBehaviour
 {
     private TextMeshPro label;
-    private Vector2Int coordinates = new Vector2Int();
+    private Vector2Int coordinates;
 
     void Awake()
     {
@@ -21,6 +21,7 @@ public class CoordinateLabeler : MonoBehaviour
         if (!Application.isPlaying)
         {
             DisplayCoordinates();
+            UpdateObjectName();
         }
             
     }
@@ -33,5 +34,10 @@ public class CoordinateLabeler : MonoBehaviour
         
         //write coordinates in game
         label.text = "(" + coordinates.x + ", " + coordinates.y + ")";
+    }
+
+    void UpdateObjectName()
+    {
+        transform.parent.name = coordinates.ToString();
     }
 }
