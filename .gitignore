@@ -71,3 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/TextMesh Pro/
+Assets/AssetPacks/BruteForce-GrassShader/Documentation.url
+Assets/AssetPacks/BruteForce-GrassShader/RenderTextures.meta
+Assets/AssetPacks/BruteForce-GrassShader/
+Assets/AssetPacks/TextMesh Pro/
