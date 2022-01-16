@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private float waitTime = 1f;
+    [SerializeField] [Range(0f,5f)] float speed = 1f;
     [SerializeField] private List<Waypoint> path = new List<Waypoint>();
+    Animator animator;
+
     void Start()
     {
-        StartCoroutine(PathFinding());
+        animator = GetComponent<Animator>();
+        StartCoroutine(PathFinding(0.75f));
     }
     
     //IENumerator : countable that the system can use. We use this for coroutines
-    IEnumerator PathFinding()
+    IEnumerator PathFinding(float delay)
     {
+        if (delay != 0f) yield return new WaitForSeconds(delay);
         foreach (Waypoint wp in path)
         {
-            //Move enemy along a predefined path
-            transform.position = wp.transform.position;
-            yield return new WaitForSeconds(waitTime);
+            Vector3 startPos = transform.position;
+            Vector3 endPos = wp.transform.position;
+
+            float travelPercent = 0f;
+
+            //rotate game object to face the right direction
+            transform.LookAt(endPos);
+
+            while (travelPercent < 1f)
+            {
+                travelPercent += Time.deltaTime * speed;
+                transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
+                animator.SetBool("Walk Forward", true);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 
