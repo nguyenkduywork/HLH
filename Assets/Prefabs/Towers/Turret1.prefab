@@ -3787,7 +3787,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -4851,6 +4851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 5938223351078352245}
   target: {fileID: 0}
+  _particleSystem: {fileID: 6038841433018509219}
 --- !u!1 &5943769487301003897
 GameObject:
   m_ObjectHideFlags: 0

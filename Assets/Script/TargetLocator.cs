@@ -5,8 +5,9 @@ using UnityEngine;
 public class TargetLocator : MonoBehaviour
 {
     [SerializeField] Transform weapon;
-
     [SerializeField] Transform target;
+    [SerializeField] ParticleSystem _particleSystem;
+
     
     void Start()
     {
@@ -21,6 +22,14 @@ public class TargetLocator : MonoBehaviour
 
     void AimWeapon()
     {
-        weapon.LookAt(target);
+        if (target != null)
+        {
+            weapon.LookAt(target);
+            if(!_particleSystem.isPlaying) _particleSystem.Play();
+        }
+        else
+        {
+            if(_particleSystem.isPlaying) _particleSystem.Stop();
+        }
     }
 }
