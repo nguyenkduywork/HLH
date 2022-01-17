@@ -45,18 +45,31 @@ public class EnemyMover : MonoBehaviour
                         travelPercent += Time.deltaTime * speed;
                         transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
                         if (animator != null) animator.SetBool("Walk Forward", true);
-
-                        yield return new WaitForFixedUpdate();
+                        if (hp.currentHP > 0)
+                        {
+                            yield return new WaitForFixedUpdate();
+                        }
+                        else
+                        {
+                            
+                            turnOnDieAnimation();
+                            yield return null;
+                        }
 
                     }
                 }
                 else
                 {
-                    if (animator != null) animator.SetBool("Walk Forward", false);
-                    if (animator != null) animator.SetBool("Die", true);
+                    turnOnDieAnimation();
                     yield return null;
                 }
             }
+    }
+
+    void turnOnDieAnimation()
+    {
+        if (animator != null) animator.SetBool("Walk Forward", false);
+        if (animator != null) animator.SetBool("Die", true);
     }
 
 }
