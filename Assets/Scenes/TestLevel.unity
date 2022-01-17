@@ -1676,6 +1676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4996571995101024001, guid: ffeb82b3576b7b045ba2945324ace62e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6944641878333451630, guid: ffeb82b3576b7b045ba2945324ace62e, type: 3}
       propertyPath: path.Array.data[0]
       value: 
@@ -1716,9 +1720,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 6946244811266067858, guid: ffeb82b3576b7b045ba2945324ace62e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6948676829271556952, guid: ffeb82b3576b7b045ba2945324ace62e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6948676829271556952, guid: ffeb82b3576b7b045ba2945324ace62e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2185,7 +2193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2053267804 stripped
 Transform:

@@ -11,8 +11,8 @@ public class EnemyMover : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        StartCoroutine(PathFinding(0.75f));
+    if(GetComponent<Animator>() != null) animator = GetComponent<Animator>();
+    StartCoroutine(PathFinding(0.75f));
     }
     
     //IENumerator : countable that the system can use. We use this for coroutines
@@ -33,7 +33,7 @@ public class EnemyMover : MonoBehaviour
             {
                 travelPercent += Time.deltaTime * speed;
                 transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
-                animator.SetBool("Walk Forward", true);
+                if(animator != null) animator.SetBool("Walk Forward", true);
                 yield return new WaitForEndOfFrame();
             }
         }
