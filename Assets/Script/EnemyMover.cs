@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq.Expressions;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -17,17 +16,33 @@ public class EnemyMover : MonoBehaviour
     {
         if(GetComponent<Animator>() != null) animator = GetComponent<Animator>();
         hp = GetComponent<EnemyHealth>();
-        StartCoroutine(PathFinding(0.75f));
+        FindPath();
+        ReturnToStart();
+        StartCoroutine(PathFollow(0.75f));
     }
 
-   
 
+    void FindPath()
+    {
+        path.Clear();
+
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");
+
+        foreach (GameObject waypoint in waypoints)
+        {
+            path.Add(waypoint.GetComponent<Waypoint>());
+        }
+    }
+
+    void ReturnToStart()
+    {
+        transform.position = path[0].transform.position;
+    }
 
     //IENumerator : countable that the system can use. We use this for coroutines
-    IEnumerator PathFinding(float delay)
+    IEnumerator PathFollow(float delay)
     {
-        
-            if (delay != 0f) yield return new WaitForSeconds(delay);
+        if (delay != 0f) yield return new WaitForSeconds(delay);
             foreach (Waypoint wp in path)
             {
                 if (hp.currentHP > 0)
@@ -51,7 +66,6 @@ public class EnemyMover : MonoBehaviour
                         }
                         else
                         {
-                            
                             turnOnDieAnimation();
                             yield return null;
                         }
@@ -64,6 +78,8 @@ public class EnemyMover : MonoBehaviour
                     yield return null;
                 }
             }
+            //Destroy enemy game object when it reaches the end
+            Destroy(gameObject);
     }
 
     void turnOnDieAnimation()

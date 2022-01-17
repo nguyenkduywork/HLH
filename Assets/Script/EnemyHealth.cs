@@ -32,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Invoke("DestroyEnemy", 2f);
+            Invoke("DestroyEnemy", 1.75f);
         }
     }
     
