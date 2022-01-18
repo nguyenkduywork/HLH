@@ -11,9 +11,11 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private List<Waypoint> path = new List<Waypoint>();
     Animator animator;
     EnemyHealth hp;
+    private Enemy enemy;
 
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
         if(GetComponent<Animator>() != null) animator = GetComponent<Animator>();
         hp = GetComponent<EnemyHealth>();
     }
@@ -49,7 +51,7 @@ public class EnemyMover : MonoBehaviour
         if (delay != 0f) yield return new WaitForSeconds(delay);
             foreach (Waypoint wp in path)
             {
-                if (hp.currentHP > 0)
+                if(hp.currentHP > 0)
                 {
                     Vector3 startPos = transform.position;
                     Vector3 endPos = wp.transform.position;
@@ -66,7 +68,7 @@ public class EnemyMover : MonoBehaviour
                         if (animator != null) animator.SetBool("Walk Forward", true);
                         if (hp.currentHP > 0)
                         {
-                            yield return new WaitForFixedUpdate();
+                            yield return new WaitForEndOfFrame();
                         }
                         else
                         {
@@ -86,13 +88,14 @@ public class EnemyMover : MonoBehaviour
             if (transform.position == path[path.Count - 1].transform.position)
             {
                 gameObject.SetActive(false);
+                enemy.StealGold();
                 yield return null;
             }
     }
 
     void turnOnDieAnimation()
     {
-        if (animator != null) animator.SetBool("Walk Forward", false);
+        //if (animator != null) animator.SetBool("Walk Forward", false);
         if (animator != null) animator.SetBool("Die", true);
     }
 

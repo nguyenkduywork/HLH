@@ -4814,6 +4814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5938361793979967461}
   - component: {fileID: 4065738166639759578}
+  - component: {fileID: 5630103097825468733}
   m_Layer: 0
   m_Name: Turret1
   m_TagString: Untagged
@@ -4850,8 +4851,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 5938223351078352245}
-  target: {fileID: 0}
   _particleSystem: {fileID: 6038841433018509219}
+  range: 20
+--- !u!114 &5630103097825468733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943755776788645691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff4a7d12a9a67b4486ddea3d9d163c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5943769487301003897
 GameObject:
   m_ObjectHideFlags: 0
