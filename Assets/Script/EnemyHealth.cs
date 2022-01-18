@@ -7,16 +7,12 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHP = 3;
     public int currentHP;
-    void Start()
+    void OnEnable()
     {
         currentHP = maxHP;
     }
 
 
-    void Update()
-    {
-        
-    }
     public int getHP()
     {
         return currentHP;
@@ -32,12 +28,12 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Invoke("DestroyEnemy", 1.75f);
+            Invoke("SetInactiveEnemy", 1.75f);
         }
     }
     
-    void DestroyEnemy()
+    void SetInactiveEnemy()
     { 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

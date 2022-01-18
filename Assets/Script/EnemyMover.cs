@@ -12,10 +12,14 @@ public class EnemyMover : MonoBehaviour
     Animator animator;
     EnemyHealth hp;
 
-    void Start()
+    private void Start()
     {
         if(GetComponent<Animator>() != null) animator = GetComponent<Animator>();
         hp = GetComponent<EnemyHealth>();
+    }
+
+    void OnEnable()
+    {
         FindPath();
         ReturnToStart();
         StartCoroutine(PathFollow(0.75f));
@@ -62,7 +66,7 @@ public class EnemyMover : MonoBehaviour
                         if (animator != null) animator.SetBool("Walk Forward", true);
                         if (hp.currentHP > 0)
                         {
-                            yield return new WaitForEndOfFrame();
+                            yield return new WaitForFixedUpdate();
                         }
                         else
                         {
@@ -81,7 +85,7 @@ public class EnemyMover : MonoBehaviour
             //Destroy enemy game object when it reaches the end
             if (transform.position == path[path.Count - 1].transform.position)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 yield return null;
             }
     }

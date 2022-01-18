@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,12 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] ParticleSystem _particleSystem;
 
-    
-    void Start()
+
+    private void Start()
     {
         target = FindObjectOfType<EnemyMover>().transform;
     }
 
-    
     void Update()
     {
         AimWeapon();
@@ -22,6 +22,7 @@ public class TargetLocator : MonoBehaviour
 
     void AimWeapon()
     {
+        
         if (target != null)
         {
             weapon.LookAt(target);
