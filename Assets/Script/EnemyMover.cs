@@ -62,7 +62,7 @@ public class EnemyMover : MonoBehaviour
                         if (animator != null) animator.SetBool("Walk Forward", true);
                         if (hp.currentHP > 0)
                         {
-                            yield return new WaitForFixedUpdate();
+                            yield return new WaitForEndOfFrame();
                         }
                         else
                         {
@@ -79,7 +79,11 @@ public class EnemyMover : MonoBehaviour
                 }
             }
             //Destroy enemy game object when it reaches the end
-            Destroy(gameObject);
+            if (transform.position == path[path.Count - 1].transform.position)
+            {
+                Destroy(gameObject);
+                yield return null;
+            }
     }
 
     void turnOnDieAnimation()
