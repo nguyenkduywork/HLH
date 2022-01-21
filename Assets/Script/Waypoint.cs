@@ -5,24 +5,73 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] private Tower towerPrefabLV1;
+    [SerializeField] private GameObject[] towerPrefabs;
     [SerializeField] bool isPlaceable;
-
+    [SerializeField] private int costLV1 = 50;
+    [SerializeField] private int costLV2 = 100;
+    [SerializeField] private int costLV3 = 150;
+    private Bank bank;
+    private GameObject tower;
+    private bool isUpgraded = false;
+    private int lv = 0;
     public bool IsPlaceable { get { return isPlaceable; } }
+    
+
+    private void Start()
+    {
+        bank = FindObjectOfType<Bank>();
+    }
 
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (isPlaceable)
-            {
-                bool isPlaced = towerPrefabLV1.CreateTower(towerPrefabLV1,transform.position);
-                isPlaceable = !isPlaced;
-            }
-            else
-            {
-                Debug.Log("This tile is not placeable!");
-            }
+           BuildTower();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            UpgradeTower();
+        }
+    }
+
+    private void BuildTower()
+    {
+        if(bank.CurrentBalance < costLV1) print("Not enough money to build");
+        else if (!isPlaceable)
+        {
+            print("This tile is not placeable!");
+        }
+        else
+        {
+            GameObject _tower = (GameObject) Instantiate(towerPrefabs[0], transform.position, Quaternion.identity);
+            tower = _tower;
+            bank.Withdraw(costLV1);
+            isPlaceable = false;
+            lv++;
+        }
+    }
+
+    private void UpgradeTower()
+    {
+        if(bank.CurrentBalance < costLV2 || lv==3) print("Not allowed");
+        else if(bank.CurrentBalance >= costLV2 && lv==1)
+        {
+            Destroy(tower);
+            GameObject _tower = (GameObject) Instantiate(towerPrefabs[1], transform.position, Quaternion.identity);
+            tower = _tower;
+            bank.Withdraw(costLV2);
+            isUpgraded = true;
+            lv++;
+        }
+        else if (bank.CurrentBalance >= costLV3 && lv == 2)
+        {
+            Destroy(tower);
+            GameObject _tower = (GameObject) Instantiate(towerPrefabs[2], transform.position, Quaternion.identity);
+            tower = _tower;
+            bank.Withdraw(costLV3);
+            isUpgraded = true;
+            lv++;
         }
     }
 }

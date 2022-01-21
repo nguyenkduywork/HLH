@@ -8,7 +8,7 @@ public class Bank : MonoBehaviour
 
     [SerializeField] private int startBalance = 100;
     [SerializeField] private int currentBalance;
-    
+
     public int CurrentBalance { get { return currentBalance; } }
 
     private void Awake()
@@ -27,13 +27,15 @@ public class Bank : MonoBehaviour
 
         if (currentBalance < 0)
         {
-            ReloadLevel();
+            //ReloadLevel();
         }
     }
-
+    
+    /*
     void ReloadLevel()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
+    */
 }
