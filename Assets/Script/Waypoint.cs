@@ -44,7 +44,7 @@ public class Waypoint : MonoBehaviour
         }
         else
         {
-            GameObject _tower = (GameObject) Instantiate(towerPrefabs[0], transform.position, Quaternion.identity);
+            GameObject _tower = Instantiate(towerPrefabs[0], transform.position, Quaternion.identity);
             tower = _tower;
             bank.Withdraw(costLV1);
             isPlaceable = false;
@@ -58,7 +58,7 @@ public class Waypoint : MonoBehaviour
         else if(bank.CurrentBalance >= costLV2 && lv==1)
         {
             Destroy(tower);
-            GameObject _tower = (GameObject) Instantiate(towerPrefabs[1], transform.position, Quaternion.identity);
+            GameObject _tower = Instantiate(towerPrefabs[1], transform.position, Quaternion.identity);
             tower = _tower;
             bank.Withdraw(costLV2);
             isUpgraded = true;
@@ -67,7 +67,7 @@ public class Waypoint : MonoBehaviour
         else if (bank.CurrentBalance >= costLV3 && lv == 2)
         {
             Destroy(tower);
-            GameObject _tower = (GameObject) Instantiate(towerPrefabs[2], transform.position, Quaternion.identity);
+            GameObject _tower =  Instantiate(towerPrefabs[2], transform.position, Quaternion.identity);
             tower = _tower;
             bank.Withdraw(costLV3);
             isUpgraded = true;

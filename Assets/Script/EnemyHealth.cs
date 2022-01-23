@@ -37,12 +37,14 @@ public class EnemyHealth : MonoBehaviour
             //reward gold when defeated
             
             enemy.RewardGold();
+            enemy.GetComponent<BoxCollider>().enabled = false;
             Invoke("SetInactiveEnemy", 1.75f);
         }
     }
     
     void SetInactiveEnemy()
-    { 
+    {
+        enemy.GetComponent<BoxCollider>().enabled = true;
         gameObject.SetActive(false);
     }
 }
