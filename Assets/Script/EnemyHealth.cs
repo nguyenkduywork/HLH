@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHP = 3;
+    [Tooltip("Adds amount to maxHP when enemy dies")]
+    [SerializeField] private int difficultyRamp = 1;
     public int currentHP;
     
     private Enemy enemy;
@@ -37,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
             //reward gold when defeated
             
             enemy.RewardGold();
+            maxHP += difficultyRamp;
             enemy.GetComponent<BoxCollider>().enabled = false;
             Invoke("SetInactiveEnemy", 1.75f);
         }

@@ -5,6 +5,7 @@ using System.Data;
 using UnityEditor.Animations;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] [Range(0f,5f)] float speed = 1f;
@@ -32,11 +33,15 @@ public class EnemyMover : MonoBehaviour
     {
         path.Clear();
 
-        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");
+        GameObject parent = GameObject.FindGameObjectWithTag("Path");
 
-        foreach (GameObject waypoint in waypoints)
+        foreach (Transform child in parent.transform)
         {
-            path.Add(waypoint.GetComponent<Waypoint>());
+            Waypoint waypoint = child.GetComponent<Waypoint>();
+            if (waypoint != null)
+            {
+                path.Add(waypoint);
+            }
         }
     }
 
@@ -65,6 +70,8 @@ public class EnemyMover : MonoBehaviour
                     {
                         travelPercent += Time.deltaTime * speed;
                         transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
+                        
+                        //turn on walk animation
                         if (animator != null) animator.SetBool("Walk Forward", true);
                         if (hp.currentHP > 0)
                         {
@@ -75,7 +82,6 @@ public class EnemyMover : MonoBehaviour
                             turnOnDieAnimation();
                             yield return null;
                         }
-
                     }
                 }
                 else
@@ -84,15 +90,18 @@ public class EnemyMover : MonoBehaviour
                     yield return null;
                 }
             }
-            //Destroy enemy game object when it reaches the end
-            if (transform.position == path[path.Count - 1].transform.position)
-            {
-                gameObject.SetActive(false);
-                enemy.StealGold();
-                yield return null;
-            }
+            finishPath();
     }
 
+    //Destroy enemy game object when it reaches the end, also take player's money
+    void finishPath()
+    {
+        if (transform.position == path[path.Count - 1].transform.position)
+        {
+            gameObject.SetActive(false);
+            enemy.StealGold();
+        }
+    }
     void turnOnDieAnimation()
     {
         //if (animator != null) animator.SetBool("Walk Forward", false);
