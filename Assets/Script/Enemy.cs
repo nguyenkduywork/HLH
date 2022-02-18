@@ -10,9 +10,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int goldPenalty = 20;
     
     Bank bank;
+    EnemyHealth hp;
     void Start()
     {
         bank = FindObjectOfType<Bank>();
+        hp = GetComponent<EnemyHealth>();
     }
 
     void Update()
@@ -29,6 +31,6 @@ public class Enemy : MonoBehaviour
     public void StealGold()
     {
         if (bank == null) { return; }
-        bank.Withdraw(goldPenalty);
+        if(hp.currentHP >0) bank.Withdraw(goldPenalty);
     }
 }
