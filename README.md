@@ -3,4 +3,7 @@
 Humanity's Last Hope - A Tower Defense game
 
 You are humanity's last hope. Enemies are flooding to the last human base on Earth. Stop them by building state of the art defense systems ...
-This game features enemy pathfinding abilities, an upgrade compare to following a pre-made path. 
+
+
+Click on a tile to place a tower
+Hover on a tower, then click A to upgrade it.
